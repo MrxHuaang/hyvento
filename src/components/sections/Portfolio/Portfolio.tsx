@@ -14,23 +14,23 @@ export default function Portfolio() {
     <Section id="portfolio" watermark="04" className="bg-black">
       <Container>
         <MotionWrapper>
-          <div className="mb-24">
-            <span className="inline-flex items-center gap-3 text-xs font-body font-medium uppercase tracking-[0.2em] text-accent mb-6">
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-3 text-xs font-body font-medium uppercase tracking-[0.2em] text-accent">
               <span className="w-10 h-px bg-accent" aria-hidden="true" />
               {t.portfolio.label}
             </span>
-            <h2
-              className="font-display font-bold text-white leading-[0.95] tracking-[-0.03em] uppercase"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
-            >
-              {t.portfolio.title1}
-              <br />
-              {t.portfolio.title2}
-            </h2>
           </div>
+          <h2
+            className="font-display font-bold text-white leading-[0.95] tracking-[-0.03em] uppercase"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
+          >
+            {t.portfolio.title1}
+            <br />
+            {t.portfolio.title2}
+          </h2>
         </MotionWrapper>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-16">
           {projects.map((project, index) => (
             <MotionWrapper key={project.slug} delay={index * 0.12}>
               <ProjectCard project={project} />

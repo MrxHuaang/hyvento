@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CustomCursor from "@/components/ui/CustomCursor";
+
 import Container from "@/components/primitives/Container";
 import MotionWrapper from "@/components/primitives/MotionWrapper";
 import Button from "@/components/ui/Button";
@@ -47,7 +47,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <>
-      <CustomCursor />
       <Navbar />
       <main id="main-content">
         {/* Header */}
@@ -80,7 +79,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                     { label: "Stack", value: project.stack.join(" · ") },
                   ].map((meta) => (
                     <div key={meta.label}>
-                      <span className="text-xs text-grey/50 block mb-1 font-body uppercase tracking-[0.1em]">
+                      <span className="text-xs text-grey/50 block mb-1 font-body uppercase tracking-widest">
                         {meta.label}
                       </span>
                       <span className="text-sm text-grey-light/60 font-body">
@@ -109,7 +108,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                         className="w-10 h-px bg-accent"
                         aria-hidden="true"
                       />
-                      <h2 className="font-display font-semibold text-sm text-grey uppercase tracking-[0.1em]">
+                      <h2 className="font-display font-semibold text-sm text-grey uppercase tracking-widest">
                         {section.label}
                       </h2>
                     </div>
@@ -128,7 +127,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                       04
                     </span>
                     <span className="w-10 h-px bg-accent" aria-hidden="true" />
-                    <h2 className="font-display font-semibold text-sm text-grey uppercase tracking-[0.1em]">
+                    <h2 className="font-display font-semibold text-sm text-grey uppercase tracking-widest">
                       Technology Stack
                     </h2>
                   </div>

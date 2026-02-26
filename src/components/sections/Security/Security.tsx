@@ -12,41 +12,37 @@ export default function Security() {
     <Section id="security" watermark="05">
       <Container>
         <MotionWrapper>
-          <div className="mb-24">
-            <span className="inline-flex items-center gap-3 text-xs font-body font-medium uppercase tracking-[0.2em] text-accent mb-6">
+          <div className="mb-8">
+            <span className="inline-flex items-center gap-3 text-xs font-body font-medium uppercase tracking-[0.2em] text-accent">
               <span className="w-10 h-px bg-accent" aria-hidden="true" />
               {t.security.label}
             </span>
-            <h2
-              className="font-display font-bold text-white leading-[0.95] tracking-[-0.03em] uppercase"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
-            >
-              {t.security.title1}
-              <br />
-              {t.security.title2}
-            </h2>
           </div>
+          <h2
+            className="font-display font-bold text-white leading-[0.95] tracking-[-0.03em] uppercase"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
+          >
+            {t.security.title1}
+            <br />
+            {t.security.title2}
+          </h2>
         </MotionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-16">
           {t.security.items.map((item, index) => (
             <MotionWrapper key={index} delay={index * 0.1}>
-              <div className="group py-12 px-0 md:px-8 first:md:pl-0 border-t border-white/[0.06]">
-                <div className="flex items-start gap-4">
+              <div className="group p-8 lg:p-10 border border-white/5 hover:border-white/10 transition-colors duration-200">
+                <div className="flex items-start gap-5">
                   <span className="text-xs font-body text-accent tracking-[0.15em] mt-1 shrink-0">
                     0{index + 1}
                   </span>
                   <div>
-                    <h3 className="font-display font-semibold text-lg text-white mb-4 tracking-[-0.01em] uppercase transition-transform duration-300 group-hover:-translate-y-1">
+                    <h3 className="font-display font-semibold text-lg text-white mb-5 tracking-[-0.01em] uppercase">
                       {item.title}
                     </h3>
                     <p className="text-sm text-muted leading-[1.75] font-body max-w-[55ch]">
                       {item.description}
                     </p>
-                    <div
-                      className="mt-5 h-px bg-accent w-0 group-hover:w-10 transition-all duration-500 ease-out"
-                      aria-hidden="true"
-                    />
                   </div>
                 </div>
               </div>

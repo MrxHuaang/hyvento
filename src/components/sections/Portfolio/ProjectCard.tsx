@@ -9,9 +9,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/portfolio/${project.slug}`}
-      className="group block relative bg-dark-secondary border border-white/[0.06] hover:border-accent/30 transition-all duration-500 overflow-hidden hover:shadow-[0_20px_60px_rgba(17,191,156,0.12)]"
+      className="group block relative bg-dark-secondary border border-white/5 hover:border-white/10 transition-colors duration-200 overflow-hidden"
     >
-      <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-white/6 flex items-center justify-between">
         <span className="text-xs font-body text-accent tracking-[0.15em] uppercase font-medium">
           {project.label}
         </span>
@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.scope}
           </p>
         </div>
-        <div className="mt-8 pt-5 border-t border-white/[0.04]">
+        <div className="mt-8 pt-5 border-t border-white/4">
           <div className="grid grid-cols-2 gap-4 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
             <div>
               <span className="text-xs text-grey block mb-1.5 font-body uppercase tracking-wider">
@@ -47,10 +47,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
       </div>
-      <div
-        className="absolute bottom-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-500"
-        aria-hidden="true"
-      />
     </Link>
   );
 }

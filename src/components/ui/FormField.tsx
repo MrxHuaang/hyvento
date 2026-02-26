@@ -28,7 +28,7 @@ interface FormFieldProps {
 }
 
 const fieldClasses =
-  "w-full bg-transparent border-b border-white/[0.08] py-3 text-base text-white font-body placeholder-grey/40 focus:outline-none focus:border-accent transition-colors duration-200";
+  "w-full bg-transparent border-0 border-b border-white/20 py-4 text-base text-white font-body placeholder-white/30 focus:outline-none focus:border-accent transition-colors duration-300";
 
 export default function FormField({
   label,
@@ -46,7 +46,7 @@ export default function FormField({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="text-sm text-grey font-body font-medium uppercase tracking-[0.1em]"
+        className="text-[10px] text-accent font-body font-medium uppercase tracking-[0.2em]"
       >
         {label}
       </label>

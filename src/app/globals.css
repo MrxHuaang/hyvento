@@ -5,14 +5,13 @@
    ================================================ */
 
 @theme {
-  /* Color Tokens — PURE BLACK base, NO blue tint */
   --color-accent: #11bf9c;
   --color-accent-hover: #0ea386;
   --color-accent-dim: rgba(17, 191, 156, 0.15);
   --color-accent-glow: rgba(17, 191, 156, 0.08);
   --color-black: #000000;
   --color-dark: #050505;
-  --color-dark-secondary: #0c0c0c;
+  --color-dark-secondary: #0d0d0d;
   --color-dark-tertiary: #111111;
   --color-grey: #888888;
   --color-grey-light: #d4d4d4;
@@ -21,11 +20,9 @@
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-dim: rgba(255, 255, 255, 0.04);
 
-  /* Font Families */
   --font-display: var(--font-barlow-condensed), system-ui, sans-serif;
   --font-body: var(--font-dm-sans), system-ui, sans-serif;
 
-  /* Type Scale */
   --text-hero: clamp(4rem, 10vw, 10rem);
   --text-display: clamp(3rem, 6vw, 5rem);
   --text-h1: clamp(2.5rem, 5vw, 4rem);
@@ -36,17 +33,6 @@
   --text-body: 1rem;
   --text-body-sm: 0.875rem;
   --text-caption: 0.75rem;
-
-  /* Spacing Scale */
-  --space-section-xl: 12rem;
-  --space-section-lg: 9rem;
-  --space-section: 7rem;
-  --space-block: 5rem;
-  --space-element: 3.5rem;
-  --space-group: 2.5rem;
-  --space-item: 1.5rem;
-  --space-tight: 1rem;
-  --space-micro: 0.5rem;
 }
 
 /* ================================================
@@ -65,23 +51,13 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-html.lenis, html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -90,12 +66,9 @@ body {
   color: var(--color-white);
   background-color: var(--color-black);
   overflow-x: hidden;
-  cursor: none;
 }
 
-a, button, input, textarea, select {
-  cursor: none;
-}
+a, button, [role="button"], nav a { cursor: pointer; }
 
 /* ================================================
    NOISE / GRAIN TEXTURE OVERLAY
@@ -103,10 +76,7 @@ a, button, input, textarea, select {
 
 .noise-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
   z-index: 9998;
   opacity: 0.03;
@@ -115,7 +85,6 @@ a, button, input, textarea, select {
   background-size: 256px 256px;
 }
 
-/* Hero gradient with grain */
 .hero-gradient {
   position: absolute;
   inset: 0;
@@ -138,7 +107,6 @@ a, button, input, textarea, select {
   z-index: 2;
 }
 
-/* Section teal tint noise */
 .teal-noise-bg {
   position: relative;
   background: linear-gradient(180deg, #050505 0%, #080a0c 50%, #050505 100%);
@@ -172,18 +140,10 @@ p, span, a, li, label, input, textarea, select, button {
   font-family: var(--font-body);
 }
 
-/* ================================================
-   SELECTION
-   ================================================ */
-
 ::selection {
   background-color: rgba(17, 191, 156, 0.3);
   color: var(--color-white);
 }
-
-/* ================================================
-   FOCUS STATES — Accessibility
-   ================================================ */
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -203,105 +163,60 @@ p, span, a, li, label, input, textarea, select, button {
   padding: 12px 24px;
   background: var(--color-accent);
   color: var(--color-black);
-  font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--text-body-sm);
   text-decoration: none;
   transition: top 200ms ease;
 }
-
-.skip-to-content:focus {
-  top: 0;
-}
-
-/* ================================================
-   CLIP-PATH REVEAL ANIMATION
-   ================================================ */
-
-@keyframes clipReveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0% 0 0); }
-}
-
-@keyframes slideInLine {
-  from { width: 0; opacity: 0; }
-  to { width: 40px; opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ================================================
-   CUSTOM CURSOR
-   ================================================ */
-
-.custom-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-accent);
-  pointer-events: none;
-  z-index: 99999;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-
-.custom-cursor.hovering {
-  transform: translate(-50%, -50%) scale(2);
-  background: rgba(17, 191, 156, 0.1);
-}
+.skip-to-content:focus { top: 0; }
 
 /* ================================================
    SCROLLBAR
    ================================================ */
 
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-black);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 2px;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
 
 /* ================================================
-   SCROLL PROGRESS BAR
-   ================================================ */
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  background: var(--color-accent);
-  z-index: 9999;
-  transition: width 0.1s linear;
-}
-
-/* ================================================
-   WATERMARK SECTION NUMBERS
+   WATERMARK SECTION NUMBERS — 200px ENORMOUS
    ================================================ */
 
 .section-watermark {
   position: absolute;
   top: 80px;
-  right: 60px;
+  right: 40px;
   font-family: var(--font-display);
-  font-size: clamp(8rem, 15vw, 18rem);
+  font-size: 200px;
   font-weight: 900;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.04);
   pointer-events: none;
   user-select: none;
   z-index: 0;
+}
+
+/* ================================================
+   SECTION SEPARATOR
+   ================================================ */
+
+.section-separator {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.section-separator::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
 }
 
 /* ================================================
@@ -309,16 +224,10 @@ p, span, a, li, label, input, textarea, select, button {
    ================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  body { cursor: auto; }
-  a, button, input, textarea, select { cursor: auto; }
-  .custom-cursor { display: none; }
 }

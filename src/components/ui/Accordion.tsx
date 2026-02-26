@@ -16,7 +16,7 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-white/[0.06]">
+    <div className="border-b border-white/6">
       <button
         className="w-full flex items-center justify-between py-5 text-left font-display font-semibold text-lg text-white hover:text-accent transition-colors duration-200 uppercase tracking-tight"
         onClick={() => setIsOpen(!isOpen)}

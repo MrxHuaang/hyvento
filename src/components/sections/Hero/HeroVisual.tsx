@@ -54,7 +54,7 @@ export default function HeroVisual() {
         {/* Accent block */}
         <div
           data-float
-          className="absolute top-[25%] right-[25%] w-[160px] h-[160px] border border-accent/20 bg-accent/[0.03]"
+          className="absolute top-[25%] right-[25%] w-[160px] h-[160px] border border-accent/20 bg-accent/3"
         />
 
         {/* Small solid block */}
@@ -66,13 +66,13 @@ export default function HeroVisual() {
         {/* Horizontal line */}
         <div
           data-float
-          className="absolute top-[45%] right-[0%] w-[280px] h-px bg-gradient-to-l from-accent/40 to-transparent"
+          className="absolute top-[45%] right-[0%] w-[280px] h-px bg-linear-to-l from-accent/40 to-transparent"
         />
 
         {/* Vertical accent line */}
         <div
           data-float
-          className="absolute top-[15%] right-[40%] w-px h-[200px] bg-gradient-to-b from-transparent via-accent/30 to-transparent"
+          className="absolute top-[15%] right-[40%] w-px h-[200px] bg-linear-to-b from-transparent via-accent/30 to-transparent"
         />
 
         {/* Dot grid */}

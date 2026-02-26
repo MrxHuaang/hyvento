@@ -4,6 +4,7 @@ interface SectionProps {
   id?: string;
   watermark?: string;
   noiseVariant?: boolean;
+  separator?: boolean;
 }
 
 export default function Section({
@@ -12,20 +13,24 @@ export default function Section({
   id,
   watermark,
   noiseVariant = false,
+  separator = true,
 }: SectionProps) {
   return (
-    <section
-      id={id}
-      className={`relative py-[120px] lg:py-[160px] bg-dark overflow-hidden ${
-        noiseVariant ? "teal-noise-bg" : ""
-      } ${className}`}
-    >
-      {watermark && (
-        <span className="section-watermark" aria-hidden="true">
-          {watermark}
-        </span>
-      )}
-      <div className="relative z-10">{children}</div>
-    </section>
+    <>
+      {separator && <div className="section-separator" aria-hidden="true" />}
+      <section
+        id={id}
+        className={`relative py-48 md:py-64 overflow-hidden ${
+          noiseVariant ? "teal-noise-bg" : "bg-black"
+        } ${className}`}
+      >
+        {watermark && (
+          <span className="section-watermark" aria-hidden="true">
+            {watermark}
+          </span>
+        )}
+        <div className="relative z-10">{children}</div>
+      </section>
+    </>
   );
 }
