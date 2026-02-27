@@ -61,7 +61,7 @@ export default function Footer() {
     <footer className="bg-dark text-white border-t border-white/8">
       {/* ROW 1 — Logo + Contact */}
       <Container>
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pt-20 pb-16">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12 pt-40 pb-24">
           <div>
             <p className="font-display text-5xl font-black tracking-tight uppercase mb-4">
               Hyvento
@@ -84,7 +84,7 @@ export default function Footer() {
       {/* ROW 2 — 4-column grid */}
       <div className="border-t border-white/8">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-16 py-20">
             {/* Navigation */}
             <div>
               <h4 className="font-display font-semibold text-xs text-accent uppercase tracking-[0.2em] mb-6">
@@ -160,7 +160,7 @@ export default function Footer() {
       {/* ROW 3 — Copyright */}
       <div className="border-t border-white/8">
         <Container>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 py-12">
             <p className="text-sm text-white/30 font-body">
               © {new Date().getFullYear()} Hyvento. {t.footer.rights}
             </p>

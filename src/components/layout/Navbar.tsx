@@ -5,12 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/primitives/Container";
 import { useLanguage } from "@/i18n/context";
 
-const menuOverlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
-  exit: { opacity: 0, transition: { duration: 0.3, ease: "easeIn" } },
-};
-
 const linkContainerVariants = {
   hidden: {},
   visible: {
@@ -23,7 +17,7 @@ const linkItemVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
   },
 };
 
@@ -32,7 +26,11 @@ const brandVariants = {
   visible: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] },
+    transition: {
+      duration: 0.6,
+      delay: 0.2,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
   },
 };
 
@@ -40,6 +38,7 @@ export default function Navbar() {
   const { t, locale, toggleLocale } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   const navLinks = [
     { href: "#capabilities", label: t.nav.capabilities },
@@ -65,7 +64,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-[20px] bg-black/70 border-b border-white/6"
+          ? "backdrop-blur-lg bg-gradient-to-b from-black/40 to-black/20 border-b border-white/10 shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -76,84 +75,102 @@ export default function Navbar() {
         >
           <a
             href="/"
-            className="font-display text-xl font-bold text-white tracking-tight relative z-50 uppercase"
+            className="font-display text-lg font-bold text-white tracking-tight relative z-50 uppercase bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent"
           >
             Hyvento
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <ul className="flex items-center gap-8">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm font-body text-muted hover:text-white transition-colors duration-200 uppercase tracking-wider"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={toggleLocale}
-              className="text-xs font-body font-semibold uppercase tracking-wider border border-white/10 px-3 py-1.5 text-muted hover:text-accent hover:border-accent/30 transition-all duration-200 cursor-pointer"
-              aria-label={
-                locale === "es" ? "Switch to English" : "Cambiar a Español"
-              }
-            >
-              {locale === "es" ? "EN" : "ES"}
-            </button>
-          </div>
+          {/* Desktop Navigation */}
+          <motion.div
+            className="hidden md:flex items-center gap-12"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onMouseEnter={() => setHoveredLink(link.href)}
+                onMouseLeave={() => setHoveredLink(null)}
+                className="relative group font-body text-sm font-semibold text-white/70 hover:text-white transition-colors duration-300 uppercase tracking-wide"
+              >
+                {link.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-accent to-accent/30 transition-all duration-300 ${
+                    hoveredLink === link.href ? "w-full" : "w-0"
+                  }`}
+                />
+              </a>
+            ))}
+          </motion.div>
 
-          {/* Mobile hamburger + language */}
-          <div className="md:hidden flex items-center gap-4">
-            <button
+          {/* Navigation Controls (Hamburger + Lang) */}
+          <div className="flex items-center gap-6">
+            <motion.button
               onClick={toggleLocale}
-              className="text-xs font-body font-semibold uppercase tracking-wider border border-white/10 px-2.5 py-1 text-muted relative z-50 cursor-pointer"
+              className="hidden sm:flex text-xs font-body font-bold uppercase tracking-widest border border-white/20 hover:border-white/40 px-3 py-2 text-white/70 hover:text-white relative z-50 cursor-pointer transition-all duration-300 rounded-full"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {locale === "es" ? "EN" : "ES"}
-            </button>
-            <button
-              className="relative z-50 w-8 h-8 flex flex-col items-center justify-center gap-[5px] cursor-pointer"
+            </motion.button>
+            <motion.button
+              className="relative z-50 w-8 h-8 flex flex-col items-center justify-center gap-[5px] cursor-pointer md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <span
-                className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[3.25px]" : ""}`}
+              <motion.span
+                className={`block w-5 h-[2px] bg-white transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[3.5px]" : ""}`}
+                animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 3.5 : 0 }}
               />
-              <span
-                className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[3.25px]" : ""}`}
+              <motion.span
+                className={`block w-5 h-[2px] bg-white transition-all duration-300 ${mobileOpen ? "opacity-0" : "opacity-100"}`}
+                animate={{ opacity: mobileOpen ? 0 : 1 }}
               />
-            </button>
+              <motion.span
+                className={`block w-5 h-[2px] bg-white transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`}
+                animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -3.5 : 0 }}
+              />
+            </motion.button>
           </div>
 
           {/* ============================================
-              FULLSCREEN MOBILE MENU — inspired by reference
+              FULLSCREEN MOBILE MENU 
               ============================================ */}
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
-                className="md:hidden fixed inset-0 bg-black z-40 flex flex-col"
-                variants={menuOverlayVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+                className="fixed inset-0 bg-gradient-to-b from-black/95 to-black/90 backdrop-blur-md z-40 flex flex-col"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
               >
                 {/* Top bar inside menu */}
-                <div className="flex items-center justify-between px-6 pt-6">
-                  <span className="font-display text-lg font-bold text-white uppercase tracking-tight">
+                <div className="flex items-center justify-between px-4 sm:px-6 pt-6 pb-6 border-b border-white/10">
+                  <span className="font-display text-xl font-bold text-white uppercase tracking-tight bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
                     Hyvento
                   </span>
+                  <motion.button
+                    onClick={toggleLocale}
+                    className="text-xs font-body font-bold uppercase tracking-widest border border-white/20 px-3 py-2 text-white/70 rounded-full"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {locale === "es" ? "EN" : "ES"}
+                  </motion.button>
                 </div>
 
                 {/* Layout: nav links left, brand right */}
-                <div className="flex-1 flex items-center px-6 sm:px-10">
+                <div className="flex-1 flex items-center px-4 sm:px-8">
                   <div className="flex w-full items-center justify-between">
                     {/* Nav links — left side */}
                     <motion.ul
-                      className="flex flex-col gap-6"
+                      className="flex flex-col gap-8 sm:gap-6"
                       variants={linkContainerVariants}
                       initial="hidden"
                       animate="visible"
@@ -193,7 +210,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Bottom bar — contact info */}
-                <div className="px-6 sm:px-10 pb-8 border-t border-white/8 pt-6 flex items-center justify-between">
+                <div className="px-4 sm:px-8 pb-8 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                   <div>
                     <p className="text-xs font-body text-white/30 uppercase tracking-[0.15em] mb-1">
                       {locale === "es" ? "Contacto" : "Contact"}

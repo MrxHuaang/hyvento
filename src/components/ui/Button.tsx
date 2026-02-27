@@ -26,15 +26,15 @@ const variantClasses = {
   primary:
     "bg-accent text-black font-semibold hover:bg-accent-hover border border-accent",
   outline:
-    "bg-transparent text-accent border border-accent hover:bg-accent hover:text-black",
+    "bg-gradient-to-br from-accent/10 to-accent/5 text-accent border border-accent/40 hover:bg-accent hover:text-black hover:border-accent hover:shadow-[0_0_40px_rgba(17,191,156,0.5)] backdrop-blur-lg rounded-lg relative overflow-hidden group",
   ghost:
     "bg-transparent text-grey-light/60 border border-transparent hover:text-white",
 };
 
 const sizeClasses = {
-  sm: "px-5 py-2 text-xs tracking-[0.1em]",
-  md: "px-7 py-3 text-sm tracking-[0.1em]",
-  lg: "px-10 py-4 text-sm tracking-[0.1em]",
+  sm: "px-6 py-3 text-xs tracking-[0.12em]",
+  md: "px-8 py-3.5 text-sm tracking-[0.12em]",
+  lg: "px-12 py-4.5 text-sm tracking-[0.12em]",
 };
 
 export default function Button({

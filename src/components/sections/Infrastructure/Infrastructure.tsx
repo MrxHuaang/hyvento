@@ -50,8 +50,8 @@ export default function Infrastructure() {
         </div>
 
         <MotionWrapper>
-          <div className="h-px w-full bg-white/6 mb-14" />
-          <h3 className="font-display font-semibold text-xl text-white mb-10 tracking-[-0.02em] uppercase">
+          <div className="h-px w-full bg-white/6 mb-20 mt-40" />
+          <h3 className="font-display font-semibold text-2xl text-white mb-16 tracking-[-0.02em] uppercase">
             {t.infrastructure.slaTitle}
           </h3>
           <div className="max-w-[680px]">

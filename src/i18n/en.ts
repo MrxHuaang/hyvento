@@ -15,7 +15,7 @@ export const en: Translations = {
     line3: "WITH PRECISION",
     subtitle1: "Architecture-first software for enterprise operations.",
     subtitle2: "Designed to scale. Built to endure.",
-    cta: "Start a Conversation",
+    cta: "Start Conversation ↗",
   },
   capabilities: {
     label: "What We Build",

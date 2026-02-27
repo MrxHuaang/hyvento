@@ -10,7 +10,12 @@ export default function Contact() {
   const { t } = useLanguage();
 
   return (
-    <Section id="contact" watermark="07" noiseVariant>
+    <Section
+      id="contact"
+      watermark="07"
+      noiseVariant
+      className="py-[200px]! md:py-[280px]!"
+    >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-20 lg:gap-32">
           <MotionWrapper>
